@@ -1,13 +1,16 @@
 # Wiring Diagram Reference — All Simulated Nodes
 
-This file gives a clear, printer-friendly wiring reference for every simulated node.
+This file provides visual vector schematics and color-coded ASCII pin references for every simulated node.
 **Color code:** Red = VCC/+, Black = GND, Blue/Green/Yellow/Orange/Magenta/Cyan = signal. All signals are ESP32 GPIO.
 
-> ⚠️ These are **low-voltage ESP wiring diagrams** for simulation/bench. Mains (230V) side of relays/contactors is NOT shown — follow File 09 & File 18 for mains work and it must be wired with appropriate safety precautions.
+> ⚠️ These are **low-voltage ESP wiring diagrams** for simulation/bench. Mains (230V) side of relays/contactors is NOT shown — follow File 09, File 18 & File 21 for mains work and it must be wired with appropriate safety precautions.
 
 ---
 
 ## Sim 01 — PIR Motion Light (NODE-B2 / any motion light)
+
+![Sim 01 PIR Motion Light](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/01_pir_motion_light.svg)
+
 ```
             ESP32 DevKitC V1
          ┌─────────────────────┐
@@ -21,7 +24,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    Relay module is driven from GPIO19 (check ACTIVE-LOW/HIGH for `inverted:`).
 ```
 
+---
+
 ## Sim 02 — DHT22 Climate (Living/Dining fan)
+
+![Sim 02 DHT22 Climate](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/02_dht22_climate_fan.svg)
+
 ```
          │  3V3 o──── Red ───────────────► DHT22 VCC
          │  GND o──── Black ─────────────► DHT22 GND
@@ -30,7 +38,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
          └─────────────────────┘
 ```
 
+---
+
 ## Sim 03 — Soil Moisture & Water Pump (Garden NODE-A1)
+
+![Sim 03 Soil Moisture Pump](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/03_soil_moisture_pump.svg)
+
 ```
          │  3V3 o──── Red ───────────────► Soil-moisture module VCC
          │  GND o──── Black ─────────────► Soil module GND
@@ -39,7 +52,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
          └─────────────────────┘
 ```
 
+---
+
 ## Sim 04 — Gas Leak Detection (Kitchen NODE-B1) ⚠️ CRITICAL
+
+![Sim 04 Kitchen Gas Safety](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/04_kitchen_gas_safety.svg)
+
 ```
          │  3V3 o──── Red ───────────────► MQ-6 module VCC
          │  GND o──── Black ─────────────► MQ-6 GND
@@ -52,7 +70,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    FAIL-SAFE: power off = valve closed. Certified valve + licensed install only.
 ```
 
+---
+
 ## Sim 05 — Ultrasonic Tank Level + Dry-Run (Water NODE-C1)
+
+![Sim 05 Water Tank Ultrasonic](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/05_water_tank_ultrasonic.svg)
+
 ```
          │  GPIO5 o── Blue ─────────────► HC-SR04 TRIG
          │  GPIO18 o── Green ───────────► HC-SR04 ECHO (add divider if 5V)
@@ -64,7 +87,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
          └─────────────────────┘
 ```
 
+---
+
 ## Sim 06 — Reed Switch Door Monitor (Security F3)
+
+![Sim 06 Reed Door Security](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/06_reed_door_security.svg)
+
 ```
          │  3V3 o──── Red ───────────────► Reed switch terminal 1
          │  GPIO23 o── Green (INPUT_PULLUP) ◄── Reed terminal 2
@@ -72,7 +100,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
          └─────────────────────┘
 ```
 
+---
+
 ## Sim 07 — Stepper Curtain (Living NODE-D1) — uses AUTHORITATIVE D1 pin map
+
+![Sim 07 Stepper Curtain](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/07_stepper_curtain.svg)
+
 ```
          A4988 driver
          ┌───────────────┐
@@ -86,7 +119,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    collide with IR LED (17), relay (16) or reeds (18/19). See File 06.
 ```
 
+---
+
 ## Sim 08 — Smart Room Auto Fan & Light Controller (NODE-D1/D2/D3/D4) 🌟
+
+![Sim 08 Smart Room Switchboard](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/08_smart_room_fan_light_switchboard.svg)
+
 ```
          │  3V3 o──── Red ───────────────► PIR VCC & LDR VCC & DHT22 VCC
          │  GND o──── Black ─────────────► All Module GNDs
@@ -101,7 +139,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    Features: Real-time 2-way manual wall switch toggle sync + Occupancy auto-off + Twilight lux gating + Temperature adaptive fan.
 ```
 
+---
+
 ## Sim 09 — Smart Energy Monitor & Load Shedder (NODE-E1 Whole-House) ⚡
+
+![Sim 09 Energy Monitor Load Shedding](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/09_energy_monitor_load_shedding.svg)
+
 ```
          │  3V3 o──── Red ───────────────► Potentiometer VCC (Current sensor)
          │  GND o──── Black ─────────────► Potentiometer & Buzzer & LCD GND
@@ -116,7 +159,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    Features: 230V power calculation, kWh energy metering, automatic heavy-load shedding during demand spikes.
 ```
 
+---
+
 ## Sim 10 — Indoor Air Quality & Automated Exhaust Fan (NODE-B1 Kitchen/Washroom) 💨
+
+![Sim 10 Air Quality Auto Exhaust](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/10_air_quality_auto_exhaust.svg)
+
 ```
          │  3V3 o──── Red ───────────────► MQ-135 Gas Sensor VCC
          │  GND o──── Black ─────────────► MQ-135 & LEDs & Buzzer GND
@@ -130,7 +178,12 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    Features: Automatic exhaust ventilation purge cycle with anti-chatter hysteresis.
 ```
 
+---
+
 ## Sim 11 — Smart Doorbell, Panic Button & Fall Alarm (NODE-F1 / F4 / F5) 🚨
+
+![Sim 11 Smart Doorbell Panic Fall](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/11_smart_doorbell_panic_fall.svg)
+
 ```
          │  3V3 o──── Red ───────────────► Resistors / Pull-Ups
          │  GND o──── Black ─────────────► Switch Terminals & Buzzer/LED GNDs
@@ -147,9 +200,15 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
 
 ---
 
-## Shared rules for every node
+## Commercial Retail Shop & Heavy Appliance Automation 🏢
+
+![Commercial Shop Automation](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/12_commercial_shop_automation.svg)
+
+---
+
+## Shared Rules for Every Node
 1. **Common header** (File 06 §1) — `esphome:`, `esp32:`, `logger:`, `api:`, `ota:`, `wifi:` — is required on the real node, not just sensors.
-2. **Never drive a relay, siren, valve or motor from a raw GPIO** — always via a relay module (and a contactor for loads >10 A, File 09).
+2. **Never drive a relay, siren, valve or motor from a raw GPIO** — always via a relay module (and a contactor for loads >10 A, File 09 & File 20).
 3. **Safety-critical devices (gas valve, water valve, mains contactors) must be new + certified** and fail-safe (power-off = safe/closed).
 4. **Inductive Snubbers:** Always install an RC snubber across relay contacts switching AC motors, ceiling fans, or water pumps.
 5. Analog input: use GPIO34–39 (ADC-only, no pull-ups). Reserved: GPIO1/3 (UART0), GPIO6–11 (flash).

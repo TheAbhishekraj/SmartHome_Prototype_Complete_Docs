@@ -10,16 +10,11 @@
 
 ---
 
-## 🎯 What This Project Does
+## 🌐 Whole-House Distributed Architecture
 
-This repository contains complete engineering specifications, hardware fabrication manuals, firmware, vector wiring schematics, and interactive simulations for residential flats (~2000 sq ft) and commercial shops/retail stores using:
+![Whole House System Architecture](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/whole_home_system_architecture.svg)
 
-- **ESP32 / ESP8266** distributed microcontrollers across 8 logical zones
-- **Old PC / laptop** running Ubuntu Server LTS + Home Assistant Core + Mosquitto MQTT + Node-RED + Frigate NVR
-- **Detached 2-Way Wall Switch Sync:** Physical wall switches continue to work seamlessly for family members without cutting power to the ESP32
-- **Auto-Off Vacancy Intelligence:** Rooms automatically switch off lights and fans when vacant to conserve electricity
-- **230V AC Single-Phase & 415V Three-Phase Compatibility:** Galvanic optocoupler isolation, >6.3mm creepage air gaps, MOV surge arrestors, and RC snubbers
-- **Commercial Retail Extensions:** Signboard facade glow-sign contactors, pharmacy/freezer cold-chain temperature monitors, and armored roller shutter alarms
+> **🖼️ Complete Visual Schematics Gallery:** Browse all 13 interactive SVG schematics in the [**Photos & Visual Schematics Directory**](https://github.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/tree/master/photos).
 
 ---
 

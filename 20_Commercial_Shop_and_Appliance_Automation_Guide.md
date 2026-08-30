@@ -16,6 +16,12 @@ While originally prototyped for residential flats, this IoT architecture extends
 
 ---
 
+## 🖼️ Commercial Shop & Retail Automation Schematic
+
+![Commercial Shop Automation Schematic](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/12_commercial_shop_automation.svg)
+
+---
+
 ## 2. Commercial Shop Automation Matrix
 
 | Node ID | Sub-System | Hardware Involved | Target Commercial Function |

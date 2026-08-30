@@ -31,6 +31,8 @@ If you wire an ESP32 relay in series or cut the wall switch, family members turn
   4. Flipping the switch pulls the pin LOW/HIGH, triggering an interrupt that toggles the relay coil.
   5. **Result:** Wall switches work instantaneously like standard 2-way switches, and Home Assistant is updated in real-time.
 
+![Modular Switchboard Retrofit Schematic](https://raw.githubusercontent.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/master/photos/wiring/08_smart_room_fan_light_switchboard.svg)
+
 ```
 +-------------------------------------------------------------------------+
 |                  INDIAN MODULAR SWITCHBOARD RETROFIT                    |
