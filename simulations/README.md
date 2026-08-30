@@ -1,101 +1,93 @@
-# Running the SmartHome Simulations in VS Code (Wokwi Extension)
+# Running the SmartHome Simulations in VS Code (Wokwi extension)
 
-> Confirmed setup: **VS Code 1.132.0** with the **Wokwi VSCode extension (wokwi.wokwi-vscode@3.7.0)**. This extension runs the simulator locally in a VS Code tab — no separate browser + no manual CLI install needed.
-
----
-
-## 1. How the extension works (what's in each simulation folder)
-
-Each simulation lives in its own folder, e.g. `simulations/01_pir_motion_light/`:
-
-| File | Role in VS Code Wokwi |
-|------|-----------------------|
-| `sketch.ino` | The Arduino program the extension compiles & runs |
-| `diagram.json` | The virtual circuit (parts + wires) the simulator renders |
-| `firmware/.../*.yaml` | The *production* ESPHome config (for the real hardware, NOT used by Wokwi) |
-
-**Wokwi (the VS Code sim) only uses `sketch.ino` + `diagram.json`.** The ESPHome YAML is your reference for what the real node will do — treat the `.ino` as the "logic test" and the YAML as the "final firmware".
+> Confirmed setup: **VS Code 1.132.0** with **Wokwi vscode extension (3.7.0)** + **PlatformIO IDE extension (installed)**.
 
 ---
 
-## 2. Run Simulation 1 — step by step
+## ⚠️ IMPORTANT — VS Code Wokwi needs a *compiled* firmware (it does NOT auto-compile)
 
-1. **Open the project in VS Code**
-   - File → Open Folder → select `E:\SmartHome_Prototype_Complete_Docs`
-   - In the Explorer, expand `simulations/01_pir_motion_light/`
-   - **Click `sketch.ino` to focus it** (important — Wokwi runs the project of the active `.ino`).
+In the **browser** (wokwi.com), Wokwi compiles your `sketch.ino` for you. The **VS Code extension does not** — before you can run the simulator you must first **build** `sketch.ino` into a firmware file, and `wokwi.toml` tells the simulator where that firmware is.
 
-2. **Start the simulator**
-   - Press `Ctrl+Shift+P` (Command Palette) → type **`Wokwi: Start Simulator`** → Enter.
-   - (Menu alternative: right-click `sketch.ino` → "Open with Wokwi" in some versions.)
-
-3. **First launch — let it download**
-   - On the very first run the extension downloads the ESP32 simulation binaries (~200–400 MB). Wait for the status bar / output to show it's ready. You need internet for this one-time step only.
-
-4. **The simulator opens** in a new tab showing the ESP32 + PIR sensor + yellow LED, wired exactly like `diagram.json`.
-
-5. **Interact**
-   - **Click the PIR sensor** in the simulator → watch the yellow LED light up.
-   - The **Serial Monitor** panel opens automatically and shows the `Serial.println()` logs:
-     ```
-     PIR Motion Light Sim Started
-     [EVENT] Motion detected -> Light ON
-     ```
-   - Wait 30 s with no click → LED turns OFF, logs `[EVENT] Timeout -> Light OFF`.
-
-6. **Stop**
-   - `Ctrl+Shift+P` → **`Wokwi: Stop Simulator`**.
+There are **two supported ways to run these simulations in VS Code**: **PlatformIO** (recommended, added here) or **arduino-cli**.
 
 ---
 
-## 3. Editing to test different behaviour
+## OPTION A — PlatformIO (recommended; files already added)
 
-Inside `sketch.ino` in VS Code:
+`wokwi.toml` and `platformio.ini` are already in each simulation folder, pointing to
+`.pio/build/esp32dev/firmware.elf`.
 
-| Change | Effect |
-|--------|--------|
-| `MOTION_TIMEOUT = 30000` → `5000` | Light only holds 5 s instead of 30 s |
-| `TRIGGER_ON_RISING = false` | Light reacts to any motion level, not just the rising edge |
+### One-time install
+- PlatformIO IDE extension is already installed. On first build it will download the ESP32 toolchain (~1 GB) automatically.
 
-Edit → **Stop Simulator** → **Start Simulator** again to apply.
+### Build (must succeed before simulating)
+1. Open folder `E:\SmartHome_Prototype_Complete_Docs`
+2. Open `simulations/01_pir_motion_light/sketch.ino`
+3. **`Ctrl+Shift+P`** → **`PlatformIO: Build`** (or click the **✓ Build** icon in the PlatformIO toolbar at the bottom)
+4. Wait for the first-time toolchain download + build. Success looks like:
+   ```
+   RAM:   [==        ]  22.9% (used 74876 bytes)
+   Flash: [===       ]  26.3% (used 687541 bytes)
+   ================== [SUCCESS] Took 32.41 seconds ==================
+   ```
+5. This creates `.pio/build/esp32dev/firmware.elf`.
+
+### Run in Wokwi
+1. With `sketch.ino` still the active tab → **`Ctrl+Shift+P`** → **`Wokwi: Start Simulator`**
+2. Now it should open (no more "wokwi.toml not found").
+3. **Click the PIR** → yellow LED ON → wait 30 s → LED OFF. Serial monitor shows the `[EVENT]` lines.
+
+### To re-test after editing `sketch.ino`
+- **`PlatformIO: Build`** again, then **`Wokwi: Restart Simulator`**.
 
 ---
 
-## 4. Troubleshooting (most common issues)
+## OPTION B — arduino-cli (alternative without PlatformIO)
+
+Install Arduino CLI, then:
+```bash
+arduino-cli core update-index
+arduino-cli core install esp32:esp32
+arduino-cli compile --fqbn esp32:esp32:esp32 --output-dir build simulations/01_pir_motion_light
+```
+Then point `wokwi.toml` `firmware` to the built `.elf` (path depends on `--output-dir`).
+
+---
+
+## OPTION C — Zero-install fallback: run it in the browser right now
+
+If you just want to *see* Simulation 1 working in ~1 minute with no toolchain:
+1. Go to **https://wokwi.com** → "Start from Scratch" → **ESP32**
+2. Paste the contents of `simulations/01_pir_motion_light/diagram.json` into the **Diagram** tab
+3. Paste `sketch.ino` into the **Code** tab (delete the default)
+4. Press **▶ Start Simulation** — it auto-compiles
+5. **Click the PIR** → yellow LED → 30 s → OFF
+
+> This is the fastest way to validate the *logic*. Use it to test before/while the VS Code toolchain downloads.
+
+---
+
+## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| "Board not supported / unknown part" | Make sure `diagram.json` is in the **same folder** as the active `sketch.ino`, and the board is `board-esp32-devkit-c-v4`. |
-| Simulator window is blank / stuck | First run download not finished — wait (status bar shows progress). |
-| LED never lights when clicking PIR | Check wire colors in `diagram.json`: `pir:OUT`→`esp:23`, `light:A`→`esp:19`. Also confirm the *right* `sketch.ino` is the active tab. |
-| No Serial Monitor | View → Output, and pick the **Wokwi** channel in the dropdown. |
-| Extension asks for "project" | Every simulation folder is its own project — open/focus its `sketch.ino` first. |
-| Simulator says "make sure file is a directory with diagram.json" | The active editor must be inside a folder that has `diagram.json`. Focus the correct `sketch.ino`. |
+| "wokwi.toml configuration file not found" | Build firmware first (PlatformIO: Build), then Start Simulator. `wokwi.toml` + `diagram.json` must be in the same folder as the active `sketch.ino`. |
+| `.pio` folder missing / firmware.elf not found | Run **PlatformIO: Build** once (creates `.pio/`). |
+| First build very slow | Normal — ESP32 toolchain download (~1 GB), one-time. |
+| Permission error on `.pio` | Close VS Code, reopen folder, build again. |
+| Serial monitor empty | View → Output → **Wokwi** channel; make sure simulator tab is focused. |
 
 ---
 
-## 5. How this maps to the real hardware (very important)
-
-Wokwi proves the **logic** only. When you move to breadboard + real ESP32:
-
-1. Don't run mains from a GPIO — use the relay module, or a contactor for >10 A (File 09).
-2. Check the relay module is **ACTIVE-LOW or ACTIVE-HIGH**, and set `inverted: true` in the ESPHome YAML if needed.
-3. Flash with ESPHome (`firmware/01_pir_motion_light/pir_motion_light.yaml`) via the ESPHome dashboard — use the **ESPHome YAML**, not the `.ino`.
-4. The `.ino` and the YAML implement the **same behaviour**, so a passing simulation strongly predicts a working physical node.
-
----
-
-## 6. One simulation at a time (our plan)
-
-We commit each simulation to git as we finish:
-1. ✅ PIR Motion Light (done) — `simulations/01_pir_motion_light/`
-2. ⏭️ DHT22 Temperature & Fan Control — `simulations/02_dht22_climate/`
-3. ⏭️ Water Tank / Ultrasonic level — `simulations/03_water_tank/`
-4. ⏭️ Kitchen gas-leak logic — `simulations/04_gas_leak/`
-5. ⏭️ Fire / smoke detection — `simulations/05_fire_detection/`
-6. ⏭️ Intrusion alarm / panic — `simulations/06_alert/`
-7. ⏭️ Living Room Comfort (D1 — the complex multi-device node) — `simulations/07_d1_living/`
+## One simulation at a time
+1. ✅ PIR Motion Light — `simulations/01_pir_motion_light/`
+2. ⏭️ DHT22 Temperature & Fan Control
+3. ⏭️ Water Tank / Ultrasonic
+4. ⏭️ Kitchen gas-leak logic
+5. ⏭️ Fire / smoke detection
+6. ⏭️ Intrusion alarm / panic
+7. ⏭️ Living Room Comfort (D1 — complex multi-device node)
 
 ---
 
-*Next: open VS Code, focus `simulations/01_pir_motion_light/sketch.ino`, and press `Ctrl+Shift+P` → `Wokwi: Start Simulator`. Tell me what you see!*
+*Next: use Option C (browser) to validate logic immediately, and Option A (PlatformIO) to run inside VS Code.*
