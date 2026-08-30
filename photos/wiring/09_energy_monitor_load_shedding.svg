@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 520" width="100%" height="100%">
+  <rect width="850" height="520" fill="#0f172a" rx="10"/>
+  <text x="425" y="35" fill="#facc15" font-size="18" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SIMULATION 09 / NODE-E1: ENERGY MONITOR &amp; LOAD SHEDDER</text>
+  <text x="425" y="58" fill="#94a3b8" font-size="12" font-family="Arial, sans-serif" text-anchor="middle">PZEM-004T / Split CT + 16x2 I2C LCD + Peak Demand Load Shedding Relay</text>
+
+  <!-- ESP32 Box -->
+  <rect x="290" y="90" width="260" height="370" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5" rx="8"/>
+  <text x="420" y="120" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">ESP32 DevKit V1</text>
+  
+  <text x="305" y="170" fill="#fb923c" font-size="12">GPIO34 (CT Current ADC)</text>
+  <text x="305" y="230" fill="#c084fc" font-size="12">GPIO21 (I2C SDA)</text>
+  <text x="305" y="290" fill="#22d3ee" font-size="12">GPIO22 (I2C SCL)</text>
+  <text x="305" y="350" fill="#cbd5e1" font-size="12">GND (Common)</text>
+
+  <text x="535" y="170" fill="#10b981" font-size="12" text-anchor="end">GPIO19 (Heavy Load AC/Geyser)</text>
+  <text x="535" y="230" fill="#facc15" font-size="12" text-anchor="end">GPIO18 (Base Lighting Load)</text>
+  <text x="535" y="290" fill="#ef4444" font-size="12" text-anchor="end">GPIO23 (Overload Buzzer)</text>
+  <text x="535" y="350" fill="#f87171" font-size="12" text-anchor="end">GPIO25 (Alarm LED)</text>
+
+  <!-- CT Sensor / LCD Box Left -->
+  <rect x="30" y="120" width="220" height="120" fill="#1e293b" stroke="#facc15" stroke-width="2" rx="8"/>
+  <text x="140" y="145" fill="#fde047" font-size="13" font-weight="bold" text-anchor="middle">16x2 I2C LCD DISPLAY</text>
+  <rect x="45" y="160" width="190" height="60" fill="#0284c7" rx="4"/>
+  <text x="55" y="185" fill="#fff" font-size="11" font-family="monospace">230V 14.5A 3335W</text>
+  <text x="55" y="205" fill="#fff" font-size="11" font-family="monospace">HVY:ON  E:12.4kW</text>
+
+  <rect x="30" y="260" width="220" height="150" fill="#1e293b" stroke="#fb923c" stroke-width="2" rx="8"/>
+  <text x="140" y="285" fill="#fed7aa" font-size="13" font-weight="bold" text-anchor="middle">CURRENT SENSOR (0-25A)</text>
+  <circle cx="140" cy="340" r="30" fill="#7c2d12" stroke="#ea580c" stroke-width="2"/>
+  <text x="140" y="345" fill="#ffedd5" font-size="9" font-weight="bold" text-anchor="middle">SCT-013 CT</text>
+
+  <line x1="250" y1="340" x2="290" y2="170" stroke="#fb923c" stroke-width="3"/>
+  <line x1="250" y1="180" x2="290" y2="230" stroke="#c084fc" stroke-width="3"/>
+  <line x1="250" y1="200" x2="290" y2="290" stroke="#22d3ee" stroke-width="3"/>
+
+  <!-- Actuators Right -->
+  <rect x="590" y="90" width="230" height="370" fill="#1e293b" stroke="#10b981" stroke-width="2" rx="8"/>
+  <text x="705" y="120" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">LOAD CONTROL RELAYS</text>
+
+  <rect x="605" y="145" width="200" height="60" fill="#334155" stroke="#10b981" rx="5"/>
+  <text x="705" y="170" fill="#86efac" font-size="11" font-weight="bold" text-anchor="middle">Heavy Load Contactor</text>
+  <text x="705" y="190" fill="#fca5a5" font-size="9" text-anchor="middle">SHEDS AUTOMATICALLY >16A</text>
+
+  <rect x="605" y="220" width="200" height="60" fill="#334155" stroke="#facc15" rx="5"/>
+  <text x="705" y="245" fill="#fef08a" font-size="11" font-weight="bold" text-anchor="middle">Base Load Contactor</text>
+  <text x="705" y="265" fill="#94a3b8" font-size="9" text-anchor="middle">Essential Lighting (Always ON)</text>
+
+  <rect x="605" y="295" width="200" height="50" fill="#334155" stroke="#ef4444" rx="5"/>
+  <text x="705" y="325" fill="#f87171" font-size="11" font-weight="bold" text-anchor="middle">Overload Alarm &amp; Buzzer</text>
+
+  <line x1="550" y1="170" x2="605" y2="170" stroke="#10b981" stroke-width="3"/>
+  <line x1="550" y1="230" x2="605" y2="230" stroke="#facc15" stroke-width="3"/>
+  <line x1="550" y1="290" x2="605" y2="290" stroke="#ef4444" stroke-width="3"/>
+
+  <rect x="30" y="475" width="790" height="35" fill="#1e293b" rx="5"/>
+  <text x="425" y="497" fill="#94a3b8" font-size="11" text-anchor="middle">Demand Limit: 16A (3680W) | Auto-restores heavy load when current drops below 12A for 8s</text>
+</svg>

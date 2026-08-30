@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0f172a" rx="10"/>
+  <text x="400" y="35" fill="#38bdf8" font-size="18" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SIMULATION 06 / NODE-F3: REED SWITCH SECURITY SCHEMATIC</text>
+  <text x="400" y="58" fill="#94a3b8" font-size="12" font-family="Arial, sans-serif" text-anchor="middle">Magnetic Reed Switch + Debounced Pull-Up Input + Perimeter Alarm Alert</text>
+
+  <!-- ESP32 Box -->
+  <rect x="280" y="100" width="240" height="340" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5" rx="8"/>
+  <text x="400" y="130" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">ESP32 DevKit V1</text>
+  
+  <text x="295" y="180" fill="#f87171" font-size="12">3V3 (Internal Pull-Up)</text>
+  <text x="295" y="240" fill="#cbd5e1" font-size="12">GND (Common)</text>
+  <text x="295" y="300" fill="#4ade80" font-size="12">GPIO23 (Reed Sense)</text>
+  <text x="505" y="300" fill="#ef4444" font-size="12" text-anchor="end">GPIO19 (Alarm Alert)</text>
+  <text x="505" y="360" fill="#cbd5e1" font-size="12" text-anchor="end">GND (Common)</text>
+
+  <!-- Reed Switch Box (Left) -->
+  <rect x="40" y="140" width="180" height="200" fill="#1e293b" stroke="#10b981" stroke-width="2" rx="8"/>
+  <text x="130" y="170" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">MAGNETIC REED</text>
+  <text x="130" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">Door / Window Sensor</text>
+  <rect x="80" y="220" width="40" height="60" fill="#047857" rx="3"/>
+  <text x="100" y="255" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">REED</text>
+  <rect x="140" y="220" width="30" height="60" fill="#b91c1c" rx="3"/>
+  <text x="155" y="255" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">MAG</text>
+  <text x="205" y="240" fill="#cbd5e1" font-size="11" text-anchor="end">GND</text>
+  <text x="205" y="300" fill="#4ade80" font-size="11" text-anchor="end">SIGNAL</text>
+
+  <line x1="220" y1="240" x2="280" y2="240" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="300" x2="280" y2="300" stroke="#4ade80" stroke-width="3"/>
+
+  <!-- Alert Siren Box (Right) -->
+  <rect x="580" y="140" width="180" height="220" fill="#1e293b" stroke="#ef4444" stroke-width="2" rx="8"/>
+  <text x="670" y="170" fill="#f87171" font-size="14" font-weight="bold" text-anchor="middle">SECURITY SIREN</text>
+  <text x="670" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">Intrusion Alert</text>
+  <polygon points="650,230 690,210 690,270 650,250" fill="#dc2626"/>
+  <text x="595" y="300" fill="#ef4444" font-size="11">TRIGGER</text>
+  <text x="595" y="360" fill="#cbd5e1" font-size="11">GND</text>
+
+  <line x1="520" y1="300" x2="580" y2="300" stroke="#ef4444" stroke-width="3"/>
+  <line x1="520" y1="360" x2="580" y2="360" stroke="#64748b" stroke-width="3"/>
+
+  <rect x="40" y="445" width="720" height="35" fill="#1e293b" rx="5"/>
+  <text x="400" y="468" fill="#94a3b8" font-size="11" text-anchor="middle">Operation: Closed (Magnet Near) = Safe | Open (Magnet Away) = Intrusion Dispatched</text>
+</svg>

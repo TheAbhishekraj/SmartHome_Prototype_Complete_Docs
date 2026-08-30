@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0f172a" rx="10"/>
+  <text x="400" y="35" fill="#38bdf8" font-size="18" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SIMULATION 05 / NODE-C1: WATER TANK &amp; DRY-RUN SCHEMATIC</text>
+  <text x="400" y="58" fill="#94a3b8" font-size="12" font-family="Arial, sans-serif" text-anchor="middle">HC-SR04 Ultrasonic Sensor + Pump Contactor + Sump Float Dry-Run Cutoff</text>
+
+  <!-- ESP32 Box -->
+  <rect x="280" y="100" width="240" height="340" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5" rx="8"/>
+  <text x="400" y="130" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">ESP32 DevKit V1</text>
+  
+  <text x="295" y="180" fill="#f87171" font-size="12">5V / 3V3 Supply</text>
+  <text x="295" y="240" fill="#cbd5e1" font-size="12">GND (Common)</text>
+  <text x="295" y="290" fill="#38bdf8" font-size="12">GPIO5 (TRIG Out)</text>
+  <text x="295" y="340" fill="#4ade80" font-size="12">GPIO18 (ECHO In)</text>
+  <text x="295" y="390" fill="#fbbf24" font-size="12">GPIO34 (Float / ACS712)</text>
+  <text x="505" y="300" fill="#06b6d4" font-size="12" text-anchor="end">GPIO19 (Pump Relay)</text>
+  <text x="505" y="360" fill="#cbd5e1" font-size="12" text-anchor="end">GND (Common)</text>
+
+  <!-- Ultrasonic Sensor (Left) -->
+  <rect x="40" y="140" width="180" height="230" fill="#1e293b" stroke="#0284c7" stroke-width="2" rx="8"/>
+  <text x="130" y="170" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">HC-SR04 / JSN-SR04T</text>
+  <text x="130" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">Waterproof Ultrasonic</text>
+  <circle cx="95" cy="240" r="18" fill="#0369a1"/>
+  <circle cx="165" cy="240" r="18" fill="#0369a1"/>
+  <text x="95" y="244" fill="#fff" font-size="8" font-weight="bold" text-anchor="middle">TX</text>
+  <text x="165" y="244" fill="#fff" font-size="8" font-weight="bold" text-anchor="middle">RX</text>
+  <text x="205" y="290" fill="#38bdf8" font-size="11" text-anchor="end">TRIG</text>
+  <text x="205" y="340" fill="#4ade80" font-size="11" text-anchor="end">ECHO</text>
+
+  <line x1="220" y1="290" x2="280" y2="290" stroke="#38bdf8" stroke-width="3"/>
+  <line x1="220" y1="340" x2="280" y2="340" stroke="#4ade80" stroke-width="3"/>
+
+  <!-- Pump Contactor (Right) -->
+  <rect x="580" y="140" width="180" height="220" fill="#1e293b" stroke="#06b6d4" stroke-width="2" rx="8"/>
+  <text x="670" y="170" fill="#67e8f9" font-size="14" font-weight="bold" text-anchor="middle">PUMP CONTACTOR</text>
+  <text x="670" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">1.5HP Overhead Pump</text>
+  <circle cx="670" cy="250" r="25" fill="#0891b2"/>
+  <text x="670" y="255" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">MOTOR</text>
+  <text x="595" y="300" fill="#06b6d4" font-size="11">IN / COIL</text>
+  <text x="595" y="360" fill="#cbd5e1" font-size="11">GND</text>
+
+  <line x1="520" y1="300" x2="580" y2="300" stroke="#06b6d4" stroke-width="3"/>
+  <line x1="520" y1="360" x2="580" y2="360" stroke="#64748b" stroke-width="3"/>
+
+  <rect x="40" y="445" width="720" height="35" fill="#1e293b" rx="5"/>
+  <text x="400" y="468" fill="#94a3b8" font-size="11" text-anchor="middle">Protection: Auto-ON @ Level &lt;20% | Auto-OFF @ >95% | Immediate Cutoff on Sump Dry Run</text>
+</svg>

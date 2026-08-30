@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 520" width="100%" height="100%">
+  <rect width="850" height="520" fill="#0f172a" rx="10"/>
+  <text x="425" y="35" fill="#ef4444" font-size="18" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SIMULATION 04 / NODE-B1: KITCHEN GAS LEAK &amp; SAFETY SCHEMATIC</text>
+  <text x="425" y="58" fill="#94a3b8" font-size="12" font-family="Arial, sans-serif" text-anchor="middle">MQ-6 LPG Gas Sensor + Exhaust Fan + Gas Solenoid Shutoff + Master Siren</text>
+
+  <!-- ESP32 Box -->
+  <rect x="290" y="90" width="260" height="370" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5" rx="8"/>
+  <text x="420" y="120" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">ESP32 DevKit V1</text>
+  
+  <text x="305" y="170" fill="#f87171" font-size="12">5V / 3V3 Supply</text>
+  <text x="305" y="230" fill="#cbd5e1" font-size="12">GND (Common)</text>
+  <text x="305" y="290" fill="#fb923c" font-size="12">GPIO34 (MQ-6 Gas AO)</text>
+  <text x="535" y="170" fill="#22d3ee" font-size="12" text-anchor="end">GPIO19 (Exhaust Fan)</text>
+  <text x="535" y="230" fill="#f87171" font-size="12" text-anchor="end">GPIO21 (Gas Valve Solenoid)</text>
+  <text x="535" y="290" fill="#facc15" font-size="12" text-anchor="end">GPIO18 (Alarm Siren)</text>
+  <text x="535" y="350" fill="#cbd5e1" font-size="12" text-anchor="end">GND (Common)</text>
+
+  <!-- MQ-6 Sensor (Left) -->
+  <rect x="30" y="140" width="200" height="220" fill="#1e293b" stroke="#f97316" stroke-width="2" rx="8"/>
+  <text x="130" y="170" fill="#fb923c" font-size="14" font-weight="bold" text-anchor="middle">MQ-6 LPG SENSOR</text>
+  <text x="130" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">Tin Dioxide SnO2</text>
+  <circle cx="130" cy="245" r="28" fill="#7c2d12" stroke="#ea580c" stroke-width="2"/>
+  <text x="130" y="250" fill="#ffedd5" font-size="10" font-weight="bold" text-anchor="middle">GAS CELL</text>
+  <text x="215" y="170" fill="#f87171" font-size="11" text-anchor="end">VCC (5V)</text>
+  <text x="215" y="230" fill="#cbd5e1" font-size="11" text-anchor="end">GND</text>
+  <text x="215" y="290" fill="#fb923c" font-size="11" text-anchor="end">AOUT (via Div)</text>
+
+  <line x1="230" y1="170" x2="290" y2="170" stroke="#ef4444" stroke-width="3"/>
+  <line x1="230" y1="230" x2="290" y2="230" stroke="#64748b" stroke-width="3"/>
+  <line x1="230" y1="290" x2="290" y2="290" stroke="#fb923c" stroke-width="3"/>
+
+  <!-- Actuators (Right) -->
+  <rect x="610" y="90" width="210" height="370" fill="#1e293b" stroke="#ef4444" stroke-width="2" rx="8"/>
+  <text x="715" y="120" fill="#f87171" font-size="14" font-weight="bold" text-anchor="middle">SAFETY ACTUATORS</text>
+
+  <!-- Exhaust -->
+  <rect x="625" y="145" width="180" height="55" fill="#334155" stroke="#22d3ee" rx="5"/>
+  <text x="715" y="170" fill="#67e8f9" font-size="11" font-weight="bold" text-anchor="middle">Exhaust Fan Relay</text>
+  <text x="715" y="188" fill="#94a3b8" font-size="9" text-anchor="middle">Auto ON (Purge Vapors)</text>
+
+  <!-- Solenoid -->
+  <rect x="625" y="210" width="180" height="55" fill="#334155" stroke="#f87171" rx="5"/>
+  <text x="715" y="235" fill="#fca5a5" font-size="11" font-weight="bold" text-anchor="middle">Gas Solenoid Valve</text>
+  <text x="715" y="253" fill="#f87171" font-size="9" font-weight="bold" text-anchor="middle">FAIL-SAFE: CUTS GAS</text>
+
+  <!-- Siren -->
+  <rect x="625" y="275" width="180" height="55" fill="#334155" stroke="#facc15" rx="5"/>
+  <text x="715" y="300" fill="#fde047" font-size="11" font-weight="bold" text-anchor="middle">110dB Piezo Siren</text>
+  <text x="715" y="318" fill="#94a3b8" font-size="9" text-anchor="middle">Audible Hazard Warning</text>
+
+  <line x1="550" y1="170" x2="625" y2="170" stroke="#22d3ee" stroke-width="3"/>
+  <line x1="550" y1="230" x2="625" y2="230" stroke="#f87171" stroke-width="3"/>
+  <line x1="550" y1="290" x2="625" y2="290" stroke="#facc15" stroke-width="3"/>
+
+  <rect x="30" y="475" width="790" height="35" fill="#1e293b" rx="5"/>
+  <text x="425" y="497" fill="#fca5a5" font-size="11" font-weight="bold" text-anchor="middle">Interlock Sequence: 1. Exhaust ON -> 2. Valve SHUT -> 3. Siren ON -> 4. Phone Alert</text>
+</svg>

@@ -28,7 +28,10 @@ smarthome-prototype/
 │   ├── 15_README_For_Each_Node.md
 │   ├── 16_Learning_Path_and_References.md
 │   ├── 17_GitHub_Repository_Structure_and_README.md
-│   └── 18_Real_Home_Installation_Switchboard_Wiring_Guide.md
+│   ├── 18_Real_Home_Installation_Switchboard_Wiring_Guide.md
+│   ├── 19_Hardware_Fabrication_and_Making_Manual.md
+│   ├── 20_Commercial_Shop_and_Appliance_Automation_Guide.md
+│   └── 21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md
 │
 ├── 📁 AUDIT/                         # Engineering & Post-Audit Reports
 │   ├── 00_MASTER_AUDIT.md
@@ -55,8 +58,19 @@ smarthome-prototype/
 │
 ├── 📁 photos/                        # Visual Schematics & Build Photos
 │   ├── wiring/
+│   │   ├── whole_home_system_architecture.svg
+│   │   ├── 01_pir_motion_light.svg
+│   │   ├── 02_dht22_climate_fan.svg
+│   │   ├── 03_soil_moisture_pump.svg
+│   │   ├── 04_kitchen_gas_safety.svg
+│   │   ├── 05_water_tank_ultrasonic.svg
+│   │   ├── 06_reed_door_security.svg
+│   │   ├── 07_stepper_curtain.svg
 │   │   ├── 08_smart_room_fan_light_switchboard.svg
-│   │   └── whole_home_system_architecture.svg
+│   │   ├── 09_energy_monitor_load_shedding.svg
+│   │   ├── 10_air_quality_auto_exhaust.svg
+│   │   ├── 11_smart_doorbell_panic_fall.svg
+│   │   └── 12_commercial_shop_automation.svg
 │   └── README.md
 │
 ├── 📁 videos/                        # Installation videos

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0f172a" rx="10"/>
+  <text x="400" y="35" fill="#38bdf8" font-size="18" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SIMULATION 01 / NODE-B2: PIR MOTION LIGHT SCHEMATIC</text>
+  <text x="400" y="58" fill="#94a3b8" font-size="12" font-family="Arial, sans-serif" text-anchor="middle">ESP32 + AM312/HC-SR501 PIR Sensor + 5V Relay / LED Indicator</text>
+
+  <!-- ESP32 Box -->
+  <rect x="280" y="100" width="240" height="340" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5" rx="8"/>
+  <text x="400" y="130" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">ESP32 DevKit V1</text>
+  
+  <text x="295" y="180" fill="#f87171" font-size="12">3V3 (Power Out)</text>
+  <text x="295" y="240" fill="#cbd5e1" font-size="12">GND (Common)</text>
+  <text x="295" y="300" fill="#60a5fa" font-size="12">GPIO23 (PIR Data In)</text>
+  <text x="505" y="300" fill="#facc15" font-size="12" text-anchor="end">GPIO19 (Relay Out)</text>
+  <text x="505" y="360" fill="#cbd5e1" font-size="12" text-anchor="end">GND (Common)</text>
+
+  <!-- PIR Sensor Box (Left) -->
+  <rect x="40" y="140" width="180" height="200" fill="#1e293b" stroke="#10b981" stroke-width="2" rx="8"/>
+  <text x="130" y="170" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">PIR MOTION SENSOR</text>
+  <text x="130" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">HC-SR501 / AM312</text>
+  <circle cx="130" cy="240" r="30" fill="#047857" stroke="#34d399" stroke-width="1.5"/>
+  <text x="130" y="245" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">LENS</text>
+  <text x="205" y="180" fill="#f87171" font-size="11" text-anchor="end">VCC</text>
+  <text x="205" y="240" fill="#cbd5e1" font-size="11" text-anchor="end">GND</text>
+  <text x="205" y="300" fill="#60a5fa" font-size="11" text-anchor="end">OUT</text>
+
+  <!-- Connections PIR to ESP -->
+  <line x1="220" y1="180" x2="280" y2="180" stroke="#ef4444" stroke-width="3"/>
+  <line x1="220" y1="240" x2="280" y2="240" stroke="#64748b" stroke-width="3"/>
+  <line x1="220" y1="300" x2="280" y2="300" stroke="#3b82f6" stroke-width="3"/>
+
+  <!-- Relay & Load Box (Right) -->
+  <rect x="580" y="140" width="180" height="220" fill="#1e293b" stroke="#eab308" stroke-width="2" rx="8"/>
+  <text x="670" y="170" fill="#facc15" font-size="14" font-weight="bold" text-anchor="middle">LIGHT RELAY / LED</text>
+  <text x="670" y="190" fill="#94a3b8" font-size="11" text-anchor="middle">Active High / Opto-Isolated</text>
+  <circle cx="670" cy="250" r="25" fill="#ca8a04"/>
+  <text x="670" y="255" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">LAMP</text>
+  <text x="595" y="300" fill="#facc15" font-size="11">IN / SIG</text>
+  <text x="595" y="360" fill="#cbd5e1" font-size="11">GND</text>
+
+  <!-- Connections ESP to Relay -->
+  <line x1="520" y1="300" x2="580" y2="300" stroke="#eab308" stroke-width="3"/>
+  <line x1="520" y1="360" x2="580" y2="360" stroke="#64748b" stroke-width="3"/>
+
+  <!-- Footer Banner -->
+  <rect x="40" y="445" width="720" height="35" fill="#1e293b" rx="5"/>
+  <text x="400" y="468" fill="#94a3b8" font-size="11" text-anchor="middle">Logic: Motion Trigger -> Relay ON -> 30s Countdown -> Auto-Off on Vacancy</text>
+</svg>
