@@ -2,7 +2,7 @@
 # 🛒 Hardware Procurement, MOQ Optimization & Batch Buying Guide
 
 **Version:** 1.0 | **Target:** Minimizing Microcontroller Count via Node Clubbing & Maximizing Margin via Bulk MOQ Packs  
-**Companion File:** [`PROCUREMENT_AND_MOQ_README.md`](file:///PROCUREMENT_AND_MOQ_README.md)
+**Companion File:** [`PROCUREMENT_AND_MOQ_README.md`](./PROCUREMENT_AND_MOQ_README.md)
 
 ---
 
