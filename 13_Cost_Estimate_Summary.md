@@ -15,12 +15,14 @@
 | Power Supplies & Distribution | ₹3,000 | $36 |
 | Enclosures & Mounting | ₹2,500 | $30 |
 | Cables & Connectors | ₹2,000 | $24 |
-| Safety-Critical Certified Parts | ₹5,000 | $60 |
+| Safety-Critical Certified Parts (incl. +₹2,000 safety buffer)* | ₹7,000 | $84 |
 | Common Tools & Consumables | ₹3,120 | $37 |
 | Scrap Reuse (PC, routers, phones) | ₹0 | $0 |
-| **Subtotal** | **₹34,120** | **$409** |
-| Contingency (10%) | ₹3,412 | $41 |
-| **GRAND TOTAL** | **₹37,500** | **$450** |
+| **Subtotal** | **₹36,120** | **$433** |
+| Contingency (10%) | ₹3,612 | $43 |
+| **GRAND TOTAL** | **₹39,732** | **$476** |
+
+*\*Note: The safety-critical components budget has been padded by +₹2,000 (raising it from ₹5,000 to ₹7,000) as recommended in pre-build audits. This ensures procurement of authentic, certified protective components (e.g. ISI/BIS marked gas solenoids, heavy-duty contactors, and high-quality fuses) to guarantee system reliability when interacting with mains utilities and hazardous services.*
 
 ---
 

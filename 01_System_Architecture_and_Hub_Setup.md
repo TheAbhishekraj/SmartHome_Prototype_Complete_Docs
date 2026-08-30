@@ -550,8 +550,9 @@ tar czf $BACKUP_DIR/frigate_config_$DATE.tar.gz ./frigate/config
 # Keep only last 10 backups
 ls -t $BACKUP_DIR/*.tar.gz | tail -n +11 | xargs -r rm
 
-# Optional: Copy to external USB
-# cp $BACKUP_DIR/*_$(date +%Y%m%d)* /mnt/usb/backups/
+# OFF-BOX ROTATION: Sync backups to an external USB mount, NAS, or Cloud
+# E.g., copy to a mounted NAS share:
+# cp $BACKUP_DIR/*_$DATE.tar.gz /mnt/external_nas/backups/
 ```
 
 ```bash
@@ -561,8 +562,29 @@ crontab -e
 # Add: 0 2 * * 0 /home/youruser/smarthome/backup.sh
 ```
 
-### Home Assistant Snapshot
-In HA UI: Settings → System → Backups → Create Backup → Download to PC monthly.
+### Off-Box & Cloud Storage Integration (CRITICAL)
+Local backups are worthless if the host SSD fails. Implement an automated off-box pushing mechanism:
+1. **Google Drive Sync (via Home Assistant Add-on):**
+   - If running HAOS or Supervised, configure the **Home Assistant Google Drive Backup** addon from HACS/Github (`snabba/home-assistant-google-drive-backup`).
+   - Link your Google account and set a retention policy (e.g., keep 4 backups locally, 10 in the cloud).
+2. **Generic Docker Off-Site Sync (via `rclone`):**
+   - Install rclone: `sudo apt install rclone`
+   - Configure a remote target (Google Drive, OneDrive, AWS S3, or Backblaze B2): `rclone config`
+   - Append this sync line to the bottom of the `/home/youruser/smarthome/backup.sh` script:
+     ```bash
+     # Upload new configs to cloud remote 'gdrive' under the 'smarthome_backups' folder
+     rclone sync /home/youruser/smarthome/backups gdrive:smarthome_backups --verbose
+     ```
+
+### Restore Verification Test (Mandatory Semi-Annual Audit)
+A backup is only as good as its restore. Once every 6 months, verify the restore path:
+- **Clean Environment Test:** Spin up a temporary Docker environment on a secondary PC or laptop.
+- **Copy & Extract:** Copy the backup files onto the test machine and extract them matching the identical folder tree structure:
+  ```bash
+  tar -xzf ha_config_[datetime].tar.gz -C ./homeassistant/config --strip-components=1
+  ```
+- **Execution Run:** Spin up the stack: `docker compose up -d`
+- **Pass Criteria:** Verify you can log in, all major entities match, dashboards load, Node-RED flows are visible, and historical databases load without corruption warnings in logs.
 
 ---
 
@@ -576,6 +598,10 @@ In HA UI: Settings → System → Backups → Create Backup → Download to PC m
 ### For Network (Router + Repeaters)
 - **Old router on UPS:** Use same UPS as hub or separate 12V UPS module.
 - **DIY Router UPS:** 12V 7Ah battery + 12V charger + diode ORV (~₹800).
+
+### ATX PSU Minimum Load Note
+- **ATX Regulation:** If repurposing an old ATX desktop PSU for central 12V/5V distribution, you **MUST** install a minimum load (dummy load) resistor. Desktop ATX power supplies regulate output voltage by sensing the load on the 5V and/or 3.3V rails. If the 5V rail is unloaded while the 12V rail runs heavy loads (pumps, curtains), the 12V output will sag (below 10.5V) or the PSU will trip into safety shutdown.
+- **Solution:** Place a high-wattage power resistor (10Ω, 10-25W aluminum-clad resistor) between a red wire (+5V) and black wire (GND). Mount it to a metal chassis; it will generate heat. This stabilizes the 12V output for reliable stepper motor, contactor, and solenoid actuator performance.
 
 ### For Critical ESP32 Nodes
 Nodes that MUST work during power cut:

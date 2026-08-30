@@ -147,6 +147,19 @@ Contactor coil circuit (SEPARATE small supply, not the ESP32):
 
 **Add this to the Section 11 checklist as mandatory:** `□ Physical master ALL-OFF tested: pressing it drops ALL automated loads even with hub unplugged.`
 
+### 2.8 Firmware & Software Fail-Safe Principles (Watchdogs) ⚠️ CRITICAL
+Software can crash, memory leaks can occur, or an ESP32 can hang in an infinite loop. For safety-critical nodes (NODE-B1 Kitchen Safety, NODE-C1 Water management, NODE-S5 Fire detection), you must design the firmware defensively:
+1. **Hardware Watchdog Timer (WDT):**
+   - The ESP32 has an internal hardware watchdog timer. If the main loop runs frozen or blocks for too long, the WDT automatically restarts the CPU to restore normal operations.
+   - In ESPHome, the internal watchdog timer is active by design (defaults to 15 seconds). DO NOT modify, disable, or prolong this parameter in the YAML configurations for critical nodes.
+2. **Wi-Fi and API Disconnection Fail-Safes:**
+   - If the ESP32 loses communication with the Home Assistant Hub or the MQTT broker, it must NOT freeze or remain stuck in the last active state.
+   - For actuators (pumps, gas valves): configure the `on_shutdown` or connection-monitored actions in ESPHome to reset the relay pins to a safe state (LOW/OFF) if a connection to the API/MQTT cannot be re-established within a reasonable timeout period (e.g. 5 minutes).
+   - Use ESPHome's internal node-to-node action scripts or automate directly in node firmware rather than relying on remote Home Assistant automation triggers for critical responses (e.g., the gas leak sensor directly commands the GPIO relay of the solenoid on the same ESP32 board, rather than routing the command through Home Assistant).
+3. **Boot State Initialisation:**
+   - On boot/reset/recovery, ensure all GPIO configurations start in their safest condition.
+   - Relays powering pumps or valves must boot to `restore_mode: ALWAYS_OFF` or `ALWAYS_ON` depending on the fail-safe requirements (for gas valves: `ALWAYS_OFF` to keep the valve closed until manually opened; for sirens: `ALWAYS_OFF`).
+
 ---
 
 ## 3. Gas Safety (LPG/Natural Gas)

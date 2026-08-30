@@ -476,7 +476,10 @@ MOBILE GUARD ROBOT (Optional)
 | **GRAND TOTAL** | **20 nodes** | **₹32,320** |
 
 **Buffer (10% for replacements/mistakes):** ₹3,232  
-**Final Estimated Budget:** **₹35,500**
+**Additional Safety Component Upgrade Margin:** ₹2,000  
+**Final Estimated Budget:** **₹37,500**
+
+*\*Note: The final estimated budget has been increased to ₹37,500 to incorporate a dedicated ₹2,000 safety buffer. This ensures that safety-critical nodes use premium, certified solenoids, heavy-duty contactors, and high-quality fuses instead of low-cost generic hardware. See 13_Cost_Estimate_Summary.md for details.*
 
 ---
 
@@ -516,6 +519,8 @@ Individual Adapters:
   - F3: 12V 2A (siren)
   - A1: 12V 5A (pump + motor + valve)
 ```
+
+⚠️ **ATX PSU Minimum Load Resistor Note:** Most PC ATX power supplies require a minimum load on the 5V and/or 3.3V rail (typically a 10 ohm, 10W or 25W metal power resistor connected between a red wire (+5V) and a black wire (GND)) to regulate the output voltage properly. Without this load, the 12V rail may float, drop below 10V, or shut down entirely under load. See 01_System_Architecture_and_Hub_Setup.md Section 13 for wiring details.
 
 ### Cable Types Needed
 | Type | Gauge | Usage | Est. Length |
