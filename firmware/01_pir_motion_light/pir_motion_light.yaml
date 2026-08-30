@@ -1,0 +1,60 @@
+esphome:
+  name: kitchen_light_01
+  friendly_name: "Kitchen Light"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "KitchenLight Fallback"
+    password: !secret wifi_password
+
+captive_portal:
+
+# ---- PIR motion sensor on GPIO23 ----
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO23
+      mode:
+        input: true
+        pullup: true
+    name: "Kitchen Motion"
+    id: kitchen_motion
+    device_class: motion
+    filters:
+      - delayed_off: 30s    # TUNE: treat as "no motion" 30s after last pulse
+
+# ---- Light (relay on GPIO19) ----
+light:
+  - platform: binary
+    name: "Kitchen Light"
+    id: kitchen_light
+    restore_mode: RESTORE_DEFAULT_OFF
+
+# ---- Automation: motion -> ON, idle -> OFF ----
+interval:
+  - interval: 5s
+    then:
+      - if:
+          condition:
+            binary_sensor.is_on: kitchen_motion
+          then:
+            - light.turn_on: kitchen_light
+          else:
+            - light.turn_off: kitchen_light
