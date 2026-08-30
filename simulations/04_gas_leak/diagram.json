@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype - Simulation 04",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "gas", "top": -60, "left": 140, "attrs": { "value": "0.1" } },
+    { "type": "wokwi-buzzer", "id": "siren", "top": 100, "left": 140, "attrs": {} },
+    { "type": "wokwi-led", "id": "exhaust", "top": 150, "left": 190, "attrs": { "color": "cyan" } },
+    { "type": "wokwi-led", "id": "valve", "top": 150, "left": 240, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "esp:3V3", "gas:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "gas:GND", "black", [ "v0" ] ],
+    [ "esp:34", "gas:SIG", "blue", [ "v0" ] ],
+    [ "esp:18", "siren:1", "red", [ "v0" ] ],
+    [ "siren:2", "esp:GND.1", "black", [ "v0" ] ],
+    [ "esp:19", "exhaust:A", "green", [ "v0" ] ],
+    [ "exhaust:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "esp:21", "valve:A", "yellow", [ "v0" ] ],
+    [ "valve:C", "esp:GND.1", "black", [ "v0" ] ]
+  ]
+}

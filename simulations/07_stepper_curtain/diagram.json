@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype - Simulation 07",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-stepper-motor", "id": "stepper", "top": 50, "left": 150, "attrs": {} },
+    { "type": "wokwi-a4988", "id": "driver", "top": -30, "left": 150, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:26", "driver:STEP", "blue", [ "v0" ] ],
+    [ "esp:27", "driver:DIR", "green", [ "v0" ] ],
+    [ "esp:25", "driver:EN", "red", [ "v0" ] ],
+    [ "esp:3V3", "driver:VDD", "red", [ "v0" ] ],
+    [ "esp:GND.1", "driver:GND", "black", [ "v0" ] ],
+    [ "driver:1B", "stepper:B+", "orange", [ "v0" ] ],
+    [ "driver:1A", "stepper:B-", "orange", [ "v0" ] ],
+    [ "driver:2A", "stepper:A-", "blue", [ "v0" ] ],
+    [ "driver:2B", "stepper:A+", "blue", [ "v0" ] ]
+  ]
+}

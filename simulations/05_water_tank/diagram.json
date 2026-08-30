@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype - Simulation 05",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultra", "top": -50, "left": 150, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "current", "top": -50, "left": -100, "attrs": { "value": "0.8" } },
+    { "type": "wokwi-led", "id": "pump", "top": 100, "left": 150, "attrs": { "color": "blue" } },
+    { "type": "wokwi-led", "id": "alert", "top": 100, "left": 220, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "esp:5", "ultra:TRIG", "blue", [ "v0" ] ],
+    [ "esp:18", "ultra:ECHO", "green", [ "v0" ] ],
+    [ "esp:3V3", "ultra:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "ultra:GND", "black", [ "v0" ] ],
+    [ "esp:34", "current:SIG", "orange", [ "v0" ] ],
+    [ "esp:19", "pump:A", "green", [ "v0" ] ],
+    [ "pump:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "esp:21", "alert:A", "red", [ "v0" ] ],
+    [ "alert:C", "esp:GND.1", "black", [ "v0" ] ]
+  ]
+}
