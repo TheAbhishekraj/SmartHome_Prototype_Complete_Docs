@@ -79,14 +79,22 @@ If you just want to *see* Simulation 1 working in ~1 minute with no toolchain:
 
 ---
 
-## One simulation at a time
-1. ✅ PIR Motion Light — `simulations/01_pir_motion_light/`
-2. ⏭️ DHT22 Temperature & Fan Control
-3. ⏭️ Water Tank / Ultrasonic
-4. ⏭️ Kitchen gas-leak logic
-5. ⏭️ Fire / smoke detection
-6. ⏭️ Intrusion alarm / panic
-7. ⏭️ Living Room Comfort (D1 — complex multi-device node)
+## All 7 simulations — each in its own folder (built + validated, in git)
+
+| # | Node / purpose | Folder |
+|---|----------------|--------|
+| 1 | PIR Motion Light | `01_pir_motion_light/` ✅ |
+| 2 | DHT22 Temperature & Fan (hysteresis) | `02_dht22_climate/` ✅ |
+| 3 | Soil Moisture & Water Pump (anti-flood + cooldown) | `03_soil_moisture_pump/` ✅ |
+| 4 | Kitchen Gas Leak Detection & Alarm (fail-safe) | `04_gas_leak/` ✅ |
+| 5 | Ultrasonic Tank Level + Dry-Run Protection | `05_water_tank/` ✅ |
+| 6 | Reed Switch Door Monitor (security) | `06_reed_door/` ✅ |
+| 7 | Stepper Motor Curtain (NODE-D1, auth pin map) | `07_stepper_curtain/` ✅ |
+
+Each folder contains: `diagram.json`, `src/sketch.ino`, `platformio.ini`, `wokwi.toml`, `.gitignore`, `README.md`. Build (`PlatformIO: Build`) then run (`Wokwi: Start Simulator`).
+
+## Wiring reference
+See **`simulations/WIRING.md`** — ASCII wiring diagrams for every simulated node (color-coded, GPIO-exact). For AI-generated image versions of these diagrams, use `AUDIT/01_PROTOTYPE_PHOTO_MASTER_PROMPT.md` and save outputs to `photos/`.
 
 ---
 
