@@ -31,7 +31,10 @@ smarthome-prototype/
 │   ├── 18_Real_Home_Installation_Switchboard_Wiring_Guide.md
 │   ├── 19_Hardware_Fabrication_and_Making_Manual.md
 │   ├── 20_Commercial_Shop_and_Appliance_Automation_Guide.md
-│   └── 21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md
+│   ├── 21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md
+│   └── 22_MOQ_Bulk_Procurement_and_Hardware_Optimization_Guide.md
+│
+├── 📄 PROCUREMENT_AND_MOQ_README.md # Standalone MOQ & Bulk Procurement Manual
 │
 ├── 📁 AUDIT/                         # Engineering & Post-Audit Reports
 │   ├── 00_MASTER_AUDIT.md

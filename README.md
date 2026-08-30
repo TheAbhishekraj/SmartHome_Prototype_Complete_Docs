@@ -68,12 +68,23 @@
 | [`16_Learning_Path_and_References.md`](file:///16_Learning_Path_and_References.md) | ELI5 fundamentals, protocols & reference links |
 | [`17_GitHub_Repository_Structure_and_README.md`](file:///17_GitHub_Repository_Structure_and_README.md) | Repository organization & engineering standards |
 | [`18_Real_Home_Installation_Switchboard_Wiring_Guide.md`](file:///18_Real_Home_Installation_Switchboard_Wiring_Guide.md) | Modular switchboard retrofit, 2-way sync & snubbers |
-| [`19_Hardware_Fabrication_and_Making_Manual.md`](file:///19_Hardware_Fabrication_and_Making_Manual.md) | **[NEW] Step-by-step soldering, perfboard assembly & making manual** |
-| [`20_Commercial_Shop_and_Appliance_Automation_Guide.md`](file:///20_Commercial_Shop_and_Appliance_Automation_Guide.md) | **[NEW] Retail shop, cold-chain, glow-sign & heavy appliance guide** |
-| [`21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md`](file:///21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md) | **[NEW] IS 732, IS 13947 & IEC 60669 electrical compliance** |
+| [`19_Hardware_Fabrication_and_Making_Manual.md`](file:///19_Hardware_Fabrication_and_Making_Manual.md) | Step-by-step soldering, perfboard assembly & making manual |
+| [`20_Commercial_Shop_and_Appliance_Automation_Guide.md`](file:///20_Commercial_Shop_and_Appliance_Automation_Guide.md) | Retail shop, cold-chain, glow-sign & heavy appliance guide |
+| [`21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md`](file:///21_Industry_Standards_IS_IEC_Compliance_and_AC_Safety.md) | IS 732, IS 13947 & IEC 60669 electrical compliance |
+| [`22_MOQ_Bulk_Procurement_and_Hardware_Optimization_Guide.md`](file:///22_MOQ_Bulk_Procurement_and_Hardware_Optimization_Guide.md) | **[NEW] Wholesale MOQ batch buying & microcontroller minimization guide** |
+| [`PROCUREMENT_AND_MOQ_README.md`](file:///PROCUREMENT_AND_MOQ_README.md) | **[NEW] Standalone procurement manual & supplier links** |
 | [`AUDIT/00_MASTER_AUDIT.md`](file:///AUDIT/00_MASTER_AUDIT.md) | Initial engineering pre-build audit report |
 | [`AUDIT/01_PROTOTYPE_PHOTO_MASTER_PROMPT.md`](file:///AUDIT/01_PROTOTYPE_PHOTO_MASTER_PROMPT.md) | Ready-to-paste AI image generation prompts for visual renders |
 | [`AUDIT/02_COMPLETE_MASTER_POST_AUDIT.md`](file:///AUDIT/02_COMPLETE_MASTER_POST_AUDIT.md) | Master complete post-audit & verification sign-off |
+
+---
+
+## 🛒 MOQ Batch Buying & Microcontroller Optimization
+
+> **How we minimized 40+ microcontrollers down to just 15:**
+> - **Zone Clubbing:** 1 ESP32 ($310 in 10-pack MOQ) runs 4 relays, 4 wall switch inputs, and multiple I2C sensors simultaneously.
+> - **Wholesale MOQ Savings:** Buying in 5-pack and 10-pack batches from authorized distributors (Robu.in / Evelta) reduces per-unit costs by **35% to 55%**.
+> - **Full Details:** Read the dedicated [**Procurement & MOQ Strategy Guide**](https://github.com/TheAbhishekraj/SmartHome_Prototype_Complete_Docs/blob/master/PROCUREMENT_AND_MOQ_README.md).
 
 ---
 
