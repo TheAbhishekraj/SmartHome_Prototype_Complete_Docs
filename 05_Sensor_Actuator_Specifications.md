@@ -727,6 +727,9 @@ Current = (Voltage - 1.65) / Sensitivity
 | **Reed Switches** | 23, 22, 21, 19 | INPUT_PULLUP |
 | **Float Switches** | 23, 22 | INPUT_PULLUP |
 
+> ⚠️ **NOTE (2026):** Rows above are *generic example* assignments for a single-sensor node. They are **NOT** all simultaneously valid on one ESP32 — e.g. **Stepper (18/19)**, **IR LED (19)** and **Reed Switches (19)** share GPIO19 and must never coexist as shown. For multi-function nodes use the **authoritative per-node pin map in File 06** (see in particular **NODE-D1**, which already resolves these conflicts: stepper on 26/27/25, IR on 17, relay on 16, reeds on 19/18).
+> Hard constraints that ALWAYS apply: GPIO1/3 (UART0) and GPIO6–11 (flash) are reserved; GPIO34–39 are analog-input-only (no internal pull-up).
+
 ---
 
 *End of 05_Sensor_Actuator_Specifications.md*

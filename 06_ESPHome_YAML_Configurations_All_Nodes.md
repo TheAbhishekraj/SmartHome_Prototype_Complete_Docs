@@ -537,6 +537,32 @@ sensor:
 
 ## 5. NODE-D1: Living Room Comfort
 
+### NODE-D1 — AUTHORITATIVE PIN MAP (use ONLY this wiring reference)
+> ⚠️ This is a high-density node (2× PIR, LDR, DHT22, 2× reed, light relay, IR, stepper). The pin assignments below are **already de-conflicted** — do NOT change them without re-checking for conflicts against File 05 rules.
+
+| Function              | GPIO | Constraint / note                              |
+|-----------------------|------|------------------------------------------------|
+| LDR analog (light)    | 34   | ADC input-only pin (correct)                   |
+| DHT22 temp/humidity   | 21   | Data pin; add 5–10 kΩ pull-up                  |
+| Motion sensor 1       | 23   | INPUT                                          |
+| Motion sensor 2       | 22   | INPUT                                          |
+| Door reed switch      | 19   | INPUT_PULLUP (on-board)                        |
+| Window reed switch    | 18   | INPUT_PULLUP (on-board)                        |
+| Living-room light relay | 16 | Switch output (relay via module)               |
+| IR blaster (AC/fan)   | 17   | Remote transmitter, 38 kHz (IR LED + driver)   |
+| Stepper STEP          | 26   | A4988 STEP                                    |
+| Stepper DIR           | 27   | A4988 DIR                                     |
+| Stepper SLEEP         | 25   | A4988 SLEEP (drive HIGH to enable)             |
+
+**Conflict check (already verified — keep it this way):**
+- Reeds (18/19) are separate from stepper (26/27), IR (17) and relay (16) → **no shared-pin conflict**.
+- GPIO34/35/36/39 are ADC-only with **no internal pull-up** → never assign reeds/DHT/relay/IR here.
+- GPIO1/3 (UART0 serial) and GPIO6–11 (flash) are **hard reserved** — never use.
+- GPIO0 (boot) and GPIO2 (on-board LED) are deliberately avoided for reliability.
+- This authoritative map overrides the generic rows in File 05 (which are examples, not per-node facts).
+
+Include the **Common Header** (Section 1: `esphome:`, `esp32:`, `logger:`, `api:`, `ota:`, `wifi:`) at the top of this node, not shown below for brevity.
+
 ```yaml
 sensor:
   - platform: adc
@@ -1276,6 +1302,62 @@ output:
     id: buzzer
     inverted: true
 ```
+
+---
+
+### S5 First-Floor Variant — fire_detection_1f.yaml (unique `id` required)
+> ⚠️ **CRITICAL:** Entity `id:` values are LOCAL TO EACH NODE. When you duplicate a node (e.g. fire GF → fire 1F, or panic GF → panic 1F) you **MUST rename every `id:` and the `location` value**, otherwise the two nodes publish colliding entity/event names to Home Assistant and break automations. The clean pattern is a `_1f` / `_gf` suffix everywhere. Same rule applies to any duplicated node.
+
+```yaml
+esp8266:
+  board: nodemcuv2
+
+sensor:
+  - platform: adc
+    pin: A0
+    name: "Smoke Level 1F"
+    id: smoke_level_1f
+    unit_of_measurement: "ppm"
+    update_interval: 2s
+    filters:
+      - sliding_window_moving_average: {window_size: 10, send_every: 5}
+      - calibrate_linear:
+          - 400 -> 0.0
+          - 2500 -> 1000.0
+      - clamp: {min_value: 0}
+
+binary_sensor:
+  - platform: template
+    name: "Fire Detected 1F"
+    id: fire_alert_1f
+    device_class: smoke
+    lambda: 'return id(smoke_level_1f).state > 300.0;'  # TUNE
+    on_press:
+      then:
+        - output.turn_on: buzzer
+        - homeassistant.event:
+            event: esphome.fire_detected
+            data:
+              location: "first_floor"
+              level: !lambda 'return id(smoke_level_1f).state;'
+    on_release:
+      then:
+        - output.turn_off: buzzer
+
+output:
+  - platform: gpio
+    pin: GPIO2
+    id: buzzer
+    inverted: true
+```
+
+**Diff vs ground floor (every row MUST be unique per node):**
+| Item             | Ground floor (GF)  | First floor (1F)  |
+|------------------|--------------------|-------------------|
+| smoke `id:`      | `smoke_level_gf`   | `smoke_level_1f`  |
+| fire `id:`       | `fire_alert_gf`    | `fire_alert_1f`   |
+| event `location` | `ground_floor`     | `first_floor`     |
+| entity name      | `Smoke Level`      | `Smoke Level 1F`  |
 
 ---
 

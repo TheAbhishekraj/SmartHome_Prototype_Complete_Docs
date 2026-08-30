@@ -115,6 +115,38 @@ Relay Contacts
 
 **Use ISI-marked cables only.**
 
+### 2.7 Master Emergency Cutoff — PHYSICAL "ALL-OFF" (Hub-Independent) ⚠️ MANDATORY
+A software "OFF" command is **NOT** enough. A hung ESP32 or a dead hub must NEVER leave a pump, gas valve, or load energized and impossible to stop. Install a dedicated **physical master emergency contactor + ALL-OFF switch** that is completely independent of the ESP32/hub / power rail.
+
+**Hardware (new, certified only):**
+- 1x mains-rated contactor sized for your main load (e.g. 40A) — the ALL-OFF isolator
+- 1x normally-closed (NC) physical kill switch (e.g. mushroom "MAIN OFF") wired in the contactor-coil circuit
+- 1x reset button to re-energize after an ALL-OFF (may be combined with the kill switch as a maintained toggle)
+- All automated loads (lights, pump, valve, siren, etc.) fed **through** the contactor's main contacts, so opening it drops every automated load at once
+
+**Behavior / Fail-safe:**
+- The contactor coil is fed from a **separate supply** (not the ESP32). Pressing ALL-OFF de-energizes the coil → main contacts open → every automated load goes OFF.
+- Uses a spring-return / NC design: any coil loss **fails the loads OPEN** (dead device = loads OFF, never stuck ON).
+- The physical override always beats software — it works even if the hub is offline or firmware is caught in a loop.
+
+**Installation (licensed electrician must verify before energizing):**
+```
+┌────────────┐            ┌────────────────────────────────┐
+│ Mains IN   │──P───►  [ Contactor main contacts ] ──►  Automated Loads
+│ 230V 50Hz  │──N───►   ──────────────────────────────────
+└────────────┘            (pump / valve / light / siren)
+
+Contactor coil circuit (SEPARATE small supply, not the ESP32):
+  Coil Supply ──► [NC ALL-OFF switch] ──► [Reset switch] ──► Coil ──► Return
+       Press ALL-OFF  →  coil de-energised  →  contacts OPEN  →  ALL LOADS OFF
+```
+- Place the contactor inside/near the main panel; mount the kill button where it is reachable **without opening the panel**, clearly labelled `EMERGENCY ALL OFF — RESET REQUIRED`.
+- Use only a certified contactor + ISI-marked cable + correctly-rated fuse on the coil circuit.
+- **Do NOT bridge this with a software relay** — it must remain purely physical.
+- After an ALL-OFF, loads stay OFF until a human resets the switch (by design).
+
+**Add this to the Section 11 checklist as mandatory:** `□ Physical master ALL-OFF tested: pressing it drops ALL automated loads even with hub unplugged.`
+
 ---
 
 ## 3. Gas Safety (LPG/Natural Gas)
