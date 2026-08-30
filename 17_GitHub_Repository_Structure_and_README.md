@@ -27,58 +27,37 @@ smarthome-prototype/
 │   ├── 14_Commercialization_PCB_Design_and_Selling.md
 │   ├── 15_README_For_Each_Node.md
 │   ├── 16_Learning_Path_and_References.md
-│   └── 17_GitHub_Repository_Structure_and_README.md
+│   ├── 17_GitHub_Repository_Structure_and_README.md
+│   └── 18_Real_Home_Installation_Switchboard_Wiring_Guide.md
+│
+├── 📁 AUDIT/                         # Engineering & Post-Audit Reports
+│   ├── 00_MASTER_AUDIT.md
+│   ├── 01_PROTOTYPE_PHOTO_MASTER_PROMPT.md
+│   └── 02_COMPLETE_MASTER_POST_AUDIT.md
 │
 ├── 📁 firmware/                      # ESPHome YAML files
-│   ├── garden_balcony_controller.yaml
-│   ├── kitchen_safety_node.yaml
-│   ├── water_tank_pump.yaml
-│   ├── living_room_comfort.yaml
-│   ├── master_bedroom_comfort.yaml
-│   ├── second_bedroom_comfort.yaml
-│   ├── master_bathroom.yaml
-│   ├── common_bathroom.yaml
-│   ├── night_security_camera.yaml
-│   ├── video_doorbell.yaml
-│   ├── intrusion_alarm.yaml
-│   ├── air_quality_monitor.yaml
-│   ├── aquarium_controller.yaml
-│   ├── electrical_monitor.yaml
-│   ├── panic_button_gf.yaml
-│   ├── panic_button_1f.yaml
-│   ├── fall_detection_1f.yaml
-│   ├── fire_detection_gf.yaml
-│   └── fire_detection_1f.yaml
+│   └── 01_pir_motion_light/
 │
-├── 📁 homeassistant/                 # HA configuration
-│   ├── configuration.yaml
-│   ├── ui-lovelace.yaml
-│   ├── scenes.yaml
-│   ├── automations.yaml
-│   ├── scripts.yaml
-│   └── packages/
+├── 📁 simulations/                   # 11 Interactive Wokwi Simulation Projects
+│   ├── 01_pir_motion_light/
+│   ├── 02_dht22_climate/
+│   ├── 03_soil_moisture_pump/
+│   ├── 04_gas_leak/
+│   ├── 05_water_tank/
+│   ├── 06_reed_door/
+│   ├── 07_stepper_curtain/
+│   ├── 08_smart_room_light_fan_auto_switch/
+│   ├── 09_energy_monitor_load_shedding/
+│   ├── 10_air_quality_auto_exhaust/
+│   ├── 11_smart_doorbell_panic_fall/
+│   ├── README.md
+│   └── WIRING.md
 │
-├── 📁 nodered/                       # Node-RED flows
-│   ├── flows.json
-│   └── flow_backup_2026-08-18.json
-│
-├── 📁 pcb/                           # PCB design files
-│   ├── sensor_node/
-│   │   ├── schematic.json
-│   │   ├── pcb_layout.json
-│   │   └── gerber.zip
-│   ├── safety_node/
-│   └── camera_node/
-│
-├── 📁 simulations/                   # Wokwi/Tinkercad links
-│   ├── wokwi_garden_controller.md
-│   ├── wokwi_kitchen_safety.md
-│   └── wokwi_water_tank.md
-│
-├── 📁 photos/                        # Installation photos
-│   ├── node-b1-wiring.jpg
-│   ├── panel-installation.jpg
-│   └── dashboard-screenshot.png
+├── 📁 photos/                        # Visual Schematics & Build Photos
+│   ├── wiring/
+│   │   ├── 08_smart_room_fan_light_switchboard.svg
+│   │   └── whole_home_system_architecture.svg
+│   └── README.md
 │
 ├── 📁 videos/                        # Installation videos
 │   └── README.md (links to YouTube)

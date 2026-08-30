@@ -1,9 +1,9 @@
 # Wiring Diagram Reference — All Simulated Nodes
 
 This file gives a clear, printer-friendly wiring reference for every simulated node.
-**Color code:** Red = VCC/+, Black = GND, Blue/Green/Yellow = signal. All signals are ESP32 GPIO.
+**Color code:** Red = VCC/+, Black = GND, Blue/Green/Yellow/Orange/Magenta/Cyan = signal. All signals are ESP32 GPIO.
 
-> ⚠️ These are **low-voltage ESP wiring diagrams** for simulation/bench. Mains (230V) side of relays/contactors is NOT shown — follow File 09 for mains work and it must be wired by a licensed electrician.
+> ⚠️ These are **low-voltage ESP wiring diagrams** for simulation/bench. Mains (230V) side of relays/contactors is NOT shown — follow File 09 & File 18 for mains work and it must be wired with appropriate safety precautions.
 
 ---
 
@@ -86,13 +86,73 @@ This file gives a clear, printer-friendly wiring reference for every simulated n
    collide with IR LED (17), relay (16) or reeds (18/19). See File 06.
 ```
 
+## Sim 08 — Smart Room Auto Fan & Light Controller (NODE-D1/D2/D3/D4) 🌟
+```
+         │  3V3 o──── Red ───────────────► PIR VCC & LDR VCC & DHT22 VCC
+         │  GND o──── Black ─────────────► All Module GNDs
+         │  GPIO13 o── Green ────────────► PIR Motion OUT
+         │  GPIO34 o── Orange ───────────► LDR Lux AO (ADC Input)
+         │  GPIO23 o── Magenta ──────────► DHT22 SDA Data
+         │  GPIO19 o── Yellow ───────────► Ceiling Light Relay Module
+         │  GPIO18 o── Cyan ─────────────► Ceiling Fan Relay Module (+ RC Snubber)
+         │  GPIO25 o── Orange ───────────► Wall Rocker Switch 1 (to GND)
+         │  GPIO26 o── Blue ─────────────► Wall Rocker Switch 2 (to GND)
+         └─────────────────────┘
+   Features: Real-time 2-way manual wall switch toggle sync + Occupancy auto-off + Twilight lux gating + Temperature adaptive fan.
+```
+
+## Sim 09 — Smart Energy Monitor & Load Shedder (NODE-E1 Whole-House) ⚡
+```
+         │  3V3 o──── Red ───────────────► Potentiometer VCC (Current sensor)
+         │  GND o──── Black ─────────────► Potentiometer & Buzzer & LCD GND
+         │  GPIO34 o── Orange ───────────► Current Sensor Analog In (0-25A)
+         │  GPIO21 o── Magenta ──────────► LCD1602 I2C SDA
+         │  GPIO22 o── Cyan ─────────────► LCD1602 I2C SCL
+         │  GPIO19 o── Green ────────────► Heavy Load Relay (AC/Geyser)
+         │  GPIO18 o── Yellow ───────────► Baseline Load Relay (Lights/Fans)
+         │  GPIO23 o── Purple ───────────► Overload Warning Buzzer
+         │  GPIO25 o── Red ──────────────► Overload Alarm Strobe LED
+         └─────────────────────┘
+   Features: 230V power calculation, kWh energy metering, automatic heavy-load shedding during demand spikes.
+```
+
+## Sim 10 — Indoor Air Quality & Automated Exhaust Fan (NODE-B1 Kitchen/Washroom) 💨
+```
+         │  3V3 o──── Red ───────────────► MQ-135 Gas Sensor VCC
+         │  GND o──── Black ─────────────► MQ-135 & LEDs & Buzzer GND
+         │  GPIO34 o── Orange ───────────► MQ-135 AO (Analog PPM)
+         │  GPIO19 o── Cyan ─────────────► Exhaust Fan Relay Module
+         │  GPIO18 o── Green ────────────► Good Air Status LED (<400 PPM)
+         │  GPIO5  o── Yellow ───────────► Moderate Air Status LED (400-800 PPM)
+         │  GPIO17 o── Red ──────────────► Hazardous Air Status LED (>800 PPM)
+         │  GPIO23 o── Purple ───────────► Hazard Siren Buzzer (>1400 PPM)
+         └─────────────────────┘
+   Features: Automatic exhaust ventilation purge cycle with anti-chatter hysteresis.
+```
+
+## Sim 11 — Smart Doorbell, Panic Button & Fall Alarm (NODE-F1 / F4 / F5) 🚨
+```
+         │  3V3 o──── Red ───────────────► Resistors / Pull-Ups
+         │  GND o──── Black ─────────────► Switch Terminals & Buzzer/LED GNDs
+         │  GPIO13 o── Blue ─────────────► Outdoor Doorbell Pushbutton (to GND)
+         │  GPIO14 o── Red ──────────────► Bedside/Bathroom Panic Button (to GND)
+         │  GPIO27 o── Yellow ───────────► Elder Fall / Tilt Sensor (to GND)
+         │  GPIO26 o── Green ────────────► Alarm Reset / Disarm Switch (to GND)
+         │  GPIO19 o── Blue ─────────────► Visitor Doorbell Indicator LED
+         │  GPIO18 o── Red ──────────────► Emergency Panic Strobe LED
+         │  GPIO23 o── Purple ───────────► 2-Tone Melodic Chime & Piercing Siren Buzzer
+         └─────────────────────┘
+   Features: Melodic visitor chime + Latching critical emergency alarm with local master reset.
+```
+
 ---
 
 ## Shared rules for every node
 1. **Common header** (File 06 §1) — `esphome:`, `esp32:`, `logger:`, `api:`, `ota:`, `wifi:` — is required on the real node, not just sensors.
 2. **Never drive a relay, siren, valve or motor from a raw GPIO** — always via a relay module (and a contactor for loads >10 A, File 09).
 3. **Safety-critical devices (gas valve, water valve, mains contactors) must be new + certified** and fail-safe (power-off = safe/closed).
-4. Analog input: use GPIO34–39 (ADC-only, no pull-ups). Reserved: GPIO1/3 (UART0), GPIO6–11 (flash).
-5. Ground must be common between ESP, modules, and load supplies.
+4. **Inductive Snubbers:** Always install an RC snubber across relay contacts switching AC motors, ceiling fans, or water pumps.
+5. Analog input: use GPIO34–39 (ADC-only, no pull-ups). Reserved: GPIO1/3 (UART0), GPIO6–11 (flash).
+6. Ground must be common between ESP, modules, and load supplies.
 
 *End of Wiring Diagram Reference.*

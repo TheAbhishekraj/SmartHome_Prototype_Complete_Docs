@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot_air", "top": 120, "left": -220, "attrs": { "label": "AIR QUALITY (MQ-135 PPM)" } },
+    { "type": "wokwi-led", "id": "led_fan", "top": -80, "left": 260, "attrs": { "color": "cyan", "label": "EXHAUST FAN RELAY" } },
+    { "type": "wokwi-resistor", "id": "r_fan", "top": -30, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_good", "top": 40, "left": 260, "attrs": { "color": "green", "label": "AIR: GOOD" } },
+    { "type": "wokwi-resistor", "id": "r_good", "top": 90, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_mod", "top": 150, "left": 260, "attrs": { "color": "yellow", "label": "AIR: MODERATE" } },
+    { "type": "wokwi-resistor", "id": "r_mod", "top": 200, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_bad", "top": 260, "left": 260, "attrs": { "color": "red", "label": "AIR: HAZARDOUS" } },
+    { "type": "wokwi-resistor", "id": "r_bad", "top": 310, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 240, "left": -60, "attrs": { "hasLocalSound": "true" } }
+  ],
+  "connections": [
+    [ "esp:GND.1", "pot_air:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pot_air:VCC", "red", [ "v0" ] ],
+    [ "esp:D34", "pot_air:SIG", "orange", [ "v0" ] ],
+
+    [ "esp:D19", "r_fan:1", "cyan", [ "v0" ] ],
+    [ "r_fan:2", "led_fan:A", "cyan", [ "v0" ] ],
+    [ "esp:GND.2", "led_fan:C", "black", [ "v0" ] ],
+
+    [ "esp:D18", "r_good:1", "green", [ "v0" ] ],
+    [ "r_good:2", "led_good:A", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led_good:C", "black", [ "v0" ] ],
+
+    [ "esp:D5", "r_mod:1", "yellow", [ "v0" ] ],
+    [ "r_mod:2", "led_mod:A", "yellow", [ "v0" ] ],
+    [ "esp:GND.2", "led_mod:C", "black", [ "v0" ] ],
+
+    [ "esp:D17", "r_bad:1", "red", [ "v0" ] ],
+    [ "r_bad:2", "led_bad:A", "red", [ "v0" ] ],
+    [ "esp:GND.2", "led_bad:C", "black", [ "v0" ] ],
+
+    [ "esp:D23", "bz1:2", "purple", [ "v0" ] ],
+    [ "esp:GND.1", "bz1:1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

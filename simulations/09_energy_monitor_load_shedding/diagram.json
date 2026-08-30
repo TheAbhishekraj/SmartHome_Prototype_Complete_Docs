@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 120, "left": -220, "attrs": { "label": "CURRENT (0-25A)" } },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": -160, "left": -120, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-led", "id": "led_heavy", "top": -40, "left": 260, "attrs": { "color": "green", "label": "HEAVY LOAD (AC/GEYSER)" } },
+    { "type": "wokwi-resistor", "id": "r_heavy", "top": 10, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_base", "top": 80, "left": 260, "attrs": { "color": "yellow", "label": "BASE LOAD (LIGHTS)" } },
+    { "type": "wokwi-resistor", "id": "r_base", "top": 130, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 240, "left": 100, "attrs": { "hasLocalSound": "true" } },
+    { "type": "wokwi-led", "id": "led_alarm", "top": 240, "left": -40, "attrs": { "color": "red", "label": "OVERLOAD WARNING" } },
+    { "type": "wokwi-resistor", "id": "r_alarm", "top": 280, "left": -40, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:GND.1", "pot1:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pot1:VCC", "red", [ "v0" ] ],
+    [ "esp:D34", "pot1:SIG", "orange", [ "v0" ] ],
+
+    [ "esp:GND.1", "lcd1:GND", "black", [ "v0" ] ],
+    [ "esp:5V", "lcd1:VCC", "red", [ "v0" ] ],
+    [ "esp:D22", "lcd1:SCL", "cyan", [ "v0" ] ],
+    [ "esp:D21", "lcd1:SDA", "magenta", [ "v0" ] ],
+
+    [ "esp:D19", "r_heavy:1", "green", [ "v0" ] ],
+    [ "r_heavy:2", "led_heavy:A", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led_heavy:C", "black", [ "v0" ] ],
+
+    [ "esp:D18", "r_base:1", "yellow", [ "v0" ] ],
+    [ "r_base:2", "led_base:A", "yellow", [ "v0" ] ],
+    [ "esp:GND.2", "led_base:C", "black", [ "v0" ] ],
+
+    [ "esp:D23", "bz1:2", "purple", [ "v0" ] ],
+    [ "esp:GND.2", "bz1:1", "black", [ "v0" ] ],
+
+    [ "esp:D25", "r_alarm:1", "red", [ "v0" ] ],
+    [ "r_alarm:2", "led_alarm:A", "red", [ "v0" ] ],
+    [ "esp:GND.2", "led_alarm:C", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

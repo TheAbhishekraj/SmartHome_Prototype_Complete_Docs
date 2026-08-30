@@ -1,101 +1,57 @@
-# Running the SmartHome Simulations in VS Code (Wokwi extension)
+# Running the SmartHome Simulations in VS Code & Wokwi
 
-> Confirmed setup: **VS Code 1.132.0** with **Wokwi vscode extension (3.7.0)** + **PlatformIO IDE extension (installed)**.
+> Supported setup: **VS Code** with **Wokwi VS Code extension** + **PlatformIO IDE**, or **Zero-Install Web Simulation on Wokwi.com**.
 
 ---
 
 ## ⚠️ IMPORTANT — VS Code Wokwi needs a *compiled* firmware (it does NOT auto-compile)
 
-In the **browser** (wokwi.com), Wokwi compiles your `sketch.ino` for you. The **VS Code extension does not** — before you can run the simulator you must first **build** `sketch.ino` into a firmware file, and `wokwi.toml` tells the simulator where that firmware is.
+In the **browser** (wokwi.com), Wokwi compiles your `sketch.ino` automatically in the cloud. The **VS Code extension** requires pre-compiled firmware or PlatformIO build (`.pio/build/esp32dev/firmware.elf`), specified in `wokwi.toml`.
 
-There are **two supported ways to run these simulations in VS Code**: **PlatformIO** (recommended, added here) or **arduino-cli**.
-
----
-
-## OPTION A — PlatformIO (recommended; files already added)
-
-`wokwi.toml` and `platformio.ini` are already in each simulation folder, pointing to
-`.pio/build/esp32dev/firmware.elf`.
-
-### One-time install
-- PlatformIO IDE extension is already installed. On first build it will download the ESP32 toolchain (~1 GB) automatically.
-
-### Build (must succeed before simulating)
-1. Open folder `E:\SmartHome_Prototype_Complete_Docs`
-2. Open `simulations/01_pir_motion_light/sketch.ino`
-3. **`Ctrl+Shift+P`** → **`PlatformIO: Build`** (or click the **✓ Build** icon in the PlatformIO toolbar at the bottom)
-4. Wait for the first-time toolchain download + build. Success looks like:
-   ```
-   RAM:   [==        ]  22.9% (used 74876 bytes)
-   Flash: [===       ]  26.3% (used 687541 bytes)
-   ================== [SUCCESS] Took 32.41 seconds ==================
-   ```
-5. This creates `.pio/build/esp32dev/firmware.elf`.
-
-### Run in Wokwi
-1. With `sketch.ino` still the active tab → **`Ctrl+Shift+P`** → **`Wokwi: Start Simulator`**
-2. Now it should open (no more "wokwi.toml not found").
-3. **Click the PIR** → yellow LED ON → wait 30 s → LED OFF. Serial monitor shows the `[EVENT]` lines.
-
-### To re-test after editing `sketch.ino`
-- **`PlatformIO: Build`** again, then **`Wokwi: Restart Simulator`**.
+There are **three supported ways to run these simulations**:
 
 ---
 
-## OPTION B — arduino-cli (alternative without PlatformIO)
+## OPTION A — Zero-Install Web Simulation (Fastest & 100% Instant)
 
-Install Arduino CLI, then:
-```bash
-arduino-cli core update-index
-arduino-cli core install esp32:esp32
-arduino-cli compile --fqbn esp32:esp32:esp32 --output-dir build simulations/01_pir_motion_light
-```
-Then point `wokwi.toml` `firmware` to the built `.elf` (path depends on `--output-dir`).
+If you want to run any simulation in ~10 seconds with zero local setup:
+1. Go to **[https://wokwi.com](https://wokwi.com)** → Click **"Start from Scratch"** → Select **ESP32**.
+2. Copy the contents of the simulation folder's `diagram.json` and paste it into the **Diagram** tab.
+3. Copy the contents of `src/sketch.ino` and paste it into the **Code** tab.
+4. Press **▶ Start Simulation** — Wokwi auto-compiles and runs interactively.
 
 ---
 
-## OPTION C — Zero-install fallback: run it in the browser right now
+## OPTION B — PlatformIO in VS Code (Local Desktop IDE)
 
-If you just want to *see* Simulation 1 working in ~1 minute with no toolchain:
-1. Go to **https://wokwi.com** → "Start from Scratch" → **ESP32**
-2. Paste the contents of `simulations/01_pir_motion_light/diagram.json` into the **Diagram** tab
-3. Paste `sketch.ino` into the **Code** tab (delete the default)
-4. Press **▶ Start Simulation** — it auto-compiles
-5. **Click the PIR** → yellow LED → 30 s → OFF
+Each simulation folder contains `wokwi.toml`, `platformio.ini`, `diagram.json`, and `src/sketch.ino`.
 
-> This is the fastest way to validate the *logic*. Use it to test before/while the VS Code toolchain downloads.
-
----
-
-## Troubleshooting
-
-| Symptom | Fix |
-|---------|-----|
-| "wokwi.toml configuration file not found" | Build firmware first (PlatformIO: Build), then Start Simulator. `wokwi.toml` + `diagram.json` must be in the same folder as the active `sketch.ino`. |
-| `.pio` folder missing / firmware.elf not found | Run **PlatformIO: Build** once (creates `.pio/`). |
-| First build very slow | Normal — ESP32 toolchain download (~1 GB), one-time. |
-| Permission error on `.pio` | Close VS Code, reopen folder, build again. |
-| Serial monitor empty | View → Output → **Wokwi** channel; make sure simulator tab is focused. |
+### Build & Run Steps:
+1. Open the project root folder in VS Code.
+2. Open `simulations/<folder>/src/sketch.ino`.
+3. Press **`Ctrl+Shift+P`** → **`PlatformIO: Build`** (or click the **✓ Build** checkmark in the bottom status bar).
+4. Once built successfully, press **`Ctrl+Shift+P`** → **`Wokwi: Start Simulator`**.
+5. The interactive simulation pane will open.
 
 ---
 
-## All 7 simulations — each in its own folder (built + validated, in git)
+## Complete Simulation Suite Index (11 Functional Testbeds)
 
-| # | Node / purpose | Folder |
-|---|----------------|--------|
-| 1 | PIR Motion Light | `01_pir_motion_light/` ✅ |
-| 2 | DHT22 Temperature & Fan (hysteresis) | `02_dht22_climate/` ✅ |
-| 3 | Soil Moisture & Water Pump (anti-flood + cooldown) | `03_soil_moisture_pump/` ✅ |
-| 4 | Kitchen Gas Leak Detection & Alarm (fail-safe) | `04_gas_leak/` ✅ |
-| 5 | Ultrasonic Tank Level + Dry-Run Protection | `05_water_tank/` ✅ |
-| 6 | Reed Switch Door Monitor (security) | `06_reed_door/` ✅ |
-| 7 | Stepper Motor Curtain (NODE-D1, auth pin map) | `07_stepper_curtain/` ✅ |
-
-Each folder contains: `diagram.json`, `src/sketch.ino`, `platformio.ini`, `wokwi.toml`, `.gitignore`, `README.md`. Build (`PlatformIO: Build`) then run (`Wokwi: Start Simulator`).
-
-## Wiring reference
-See **`simulations/WIRING.md`** — ASCII wiring diagrams for every simulated node (color-coded, GPIO-exact). For AI-generated image versions of these diagrams, use `AUDIT/01_PROTOTYPE_PHOTO_MASTER_PROMPT.md` and save outputs to `photos/`.
+| # | Node Domain & Function | Directory | Key Components & Features |
+|:---:|---|---|---|
+| **01** | PIR Motion Light | `01_pir_motion_light/` | PIR sensor, 30s auto-off timer, yellow status indicator. |
+| **02** | DHT22 Climate Fan | `02_dht22_climate/` | DHT22 temp/humidity sensor, fan relay with hysteresis band. |
+| **03** | Soil Moisture Pump | `03_soil_moisture_pump/` | Soil moisture analog sensor, pump relay, anti-flood timeout. |
+| **04** | Kitchen Gas Leak Alarm | `04_gas_leak/` | MQ-6 gas sensor, emergency shutoff solenoid, alarm buzzer. |
+| **05** | Water Tank Ultrasonic | `05_water_tank/` | HC-SR04 level sensor, pump relay, dry-run float protection. |
+| **06** | Reed Switch Door Security | `06_reed_door/` | Magnetic reed switch, intrusion detection, perimeter alert. |
+| **07** | Stepper Motor Curtain | `07_stepper_curtain/` | A4988 stepper driver, motorized curtain position control. |
+| **08** | **Smart Room Fan & Light Auto-Switch** | `08_smart_room_light_fan_auto_switch/` | **PIR presence auto-off, LDR lux gating, temp-adaptive fan, 2x physical wall switch 2-way sync.** |
+| **09** | **Smart Energy Monitor & Load Shedder** | `09_energy_monitor_load_shedding/` | **Real-time current (0-25A) & power (W/kWh), 16x2 I2C LCD, auto heavy-load shedding during overload.** |
+| **10** | **Indoor Air Quality & Auto Exhaust** | `10_air_quality_auto_exhaust/` | **MQ-135 analog air quality, 3-stage LEDs, auto exhaust fan purge cycle with anti-chatter hysteresis.** |
+| **11** | **Smart Doorbell, Panic Button & Fall** | `11_smart_doorbell_panic_fall/` | **Doorbell 2-tone melodic chime, latching emergency panic button, elder fall sensor, reset switch.** |
 
 ---
 
-*Next: use Option C (browser) to validate logic immediately, and Option A (PlatformIO) to run inside VS Code.*
+## Wiring Reference
+See **`simulations/WIRING.md`** for GPIO-exact color-coded wiring references for all 11 simulated nodes.

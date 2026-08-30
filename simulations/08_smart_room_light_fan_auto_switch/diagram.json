@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir1", "top": -140, "left": -180, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": 120, "left": -220, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -140, "left": 160, "attrs": {} },
+    { "type": "wokwi-led", "id": "led_light", "top": -40, "left": 260, "attrs": { "color": "yellow", "label": "LIGHT RELAY" } },
+    { "type": "wokwi-resistor", "id": "r_light", "top": 10, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_fan", "top": 80, "left": 260, "attrs": { "color": "cyan", "label": "FAN RELAY" } },
+    { "type": "wokwi-resistor", "id": "r_fan", "top": 130, "left": 250, "attrs": { "value": "220" } },
+    { "type": "wokwi-pushbutton", "id": "btn_light", "top": 240, "left": -80, "attrs": { "color": "yellow", "label": "WALL SWITCH 1 (LIGHT)" } },
+    { "type": "wokwi-pushbutton", "id": "btn_fan", "top": 240, "left": 60, "attrs": { "color": "blue", "label": "WALL SWITCH 2 (FAN)" } }
+  ],
+  "connections": [
+    [ "esp:GND.1", "pir1:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pir1:VCC", "red", [ "v0" ] ],
+    [ "esp:D13", "pir1:OUT", "green", [ "v0" ] ],
+
+    [ "esp:GND.1", "ldr1:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "ldr1:VCC", "red", [ "v0" ] ],
+    [ "esp:D34", "ldr1:AO", "orange", [ "v0" ] ],
+
+    [ "esp:GND.2", "dht1:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "dht1:VCC", "red", [ "v0" ] ],
+    [ "esp:D23", "dht1:SDA", "magenta", [ "v0" ] ],
+
+    [ "esp:D19", "r_light:1", "yellow", [ "v0" ] ],
+    [ "r_light:2", "led_light:A", "yellow", [ "v0" ] ],
+    [ "esp:GND.2", "led_light:C", "black", [ "v0" ] ],
+
+    [ "esp:D18", "r_fan:1", "cyan", [ "v0" ] ],
+    [ "r_fan:2", "led_fan:A", "cyan", [ "v0" ] ],
+    [ "esp:GND.2", "led_fan:C", "black", [ "v0" ] ],
+
+    [ "esp:D25", "btn_light:1.r", "orange", [ "v0" ] ],
+    [ "esp:GND.1", "btn_light:2.r", "black", [ "v0" ] ],
+
+    [ "esp:D26", "btn_fan:1.r", "blue", [ "v0" ] ],
+    [ "esp:GND.2", "btn_fan:2.r", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

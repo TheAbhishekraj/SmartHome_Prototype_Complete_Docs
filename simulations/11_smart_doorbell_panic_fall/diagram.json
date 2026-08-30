@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "author": "SmartHome Prototype",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn_doorbell", "top": -140, "left": -180, "attrs": { "color": "blue", "label": "DOORBELL" } },
+    { "type": "wokwi-pushbutton", "id": "btn_panic", "top": -40, "left": -180, "attrs": { "color": "red", "label": "PANIC BUTTON" } },
+    { "type": "wokwi-pushbutton", "id": "btn_fall", "top": 60, "left": -180, "attrs": { "color": "yellow", "label": "FALL SENSOR" } },
+    { "type": "wokwi-pushbutton", "id": "btn_reset", "top": 160, "left": -180, "attrs": { "color": "green", "label": "ALARM RESET" } },
+    { "type": "wokwi-led", "id": "led_door", "top": -60, "left": 240, "attrs": { "color": "blue", "label": "VISITOR CHIME LED" } },
+    { "type": "wokwi-resistor", "id": "r_door", "top": -10, "left": 230, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_panic", "top": 60, "left": 240, "attrs": { "color": "red", "label": "EMERGENCY ALARM STROBE" } },
+    { "type": "wokwi-resistor", "id": "r_panic", "top": 110, "left": 230, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 200, "left": 100, "attrs": { "hasLocalSound": "true" } }
+  ],
+  "connections": [
+    [ "esp:D13", "btn_doorbell:1.r", "blue", [ "v0" ] ],
+    [ "esp:GND.1", "btn_doorbell:2.r", "black", [ "v0" ] ],
+
+    [ "esp:D14", "btn_panic:1.r", "red", [ "v0" ] ],
+    [ "esp:GND.1", "btn_panic:2.r", "black", [ "v0" ] ],
+
+    [ "esp:D27", "btn_fall:1.r", "yellow", [ "v0" ] ],
+    [ "esp:GND.1", "btn_fall:2.r", "black", [ "v0" ] ],
+
+    [ "esp:D26", "btn_reset:1.r", "green", [ "v0" ] ],
+    [ "esp:GND.1", "btn_reset:2.r", "black", [ "v0" ] ],
+
+    [ "esp:D19", "r_door:1", "blue", [ "v0" ] ],
+    [ "r_door:2", "led_door:A", "blue", [ "v0" ] ],
+    [ "esp:GND.2", "led_door:C", "black", [ "v0" ] ],
+
+    [ "esp:D18", "r_panic:1", "red", [ "v0" ] ],
+    [ "r_panic:2", "led_panic:A", "red", [ "v0" ] ],
+    [ "esp:GND.2", "led_panic:C", "black", [ "v0" ] ],
+
+    [ "esp:D23", "bz1:2", "purple", [ "v0" ] ],
+    [ "esp:GND.2", "bz1:1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
